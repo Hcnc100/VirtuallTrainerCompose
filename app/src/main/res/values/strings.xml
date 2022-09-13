@@ -30,4 +30,5 @@
     <string name="plancha_descripcion">Es un ejercicio isométrico de torso que consiste en mantener una posición difícil por un periodo de tiempo prolongado. La plancha más común es la plancha frontal o de antebrazo, la cual se hace en una posición de lagartija con el peso corporal apoyado sobre los antebrazos, codos y dedos de los pies.</string>
     <string name="lagartijas">Lagartijas</string>
     <string name="lagartijas_descripcion">La flexión de codos es un ejercicio que involucra los codos, también conocida como lagartijas, plancha, pechada o simplemente flexión, es un ejercicio físico realizado estando en posición inclinada, recostado hacia abajo, levantando el cuerpo únicamente con los brazos y bajando de nuevo al suelo.</string>
+    <string name="description_exercise_item">Ejercicio %s</string>
 </resources>

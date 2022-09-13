@@ -4,8 +4,7 @@ import android.content.Context
 import com.d34th.nullpointer.virtualtrainercompose.data.local.dataStore.UsersSettings
 import com.d34th.nullpointer.virtualtrainercompose.data.local.userSettings.UserSettingsDataSource
 import com.d34th.nullpointer.virtualtrainercompose.data.local.userSettings.UserSettingsDataSourceImpl
-import com.d34th.nullpointer.virtualtrainercompose.domain.UserSettingsRepoImpl
-import com.d34th.nullpointer.virtualtrainercompose.domain.UserSettingsRepository
+import com.d34th.nullpointer.virtualtrainercompose.domain.settings.UserSettingsRepoImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

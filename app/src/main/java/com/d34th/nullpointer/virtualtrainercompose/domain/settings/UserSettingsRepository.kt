@@ -1,4 +1,4 @@
-package com.d34th.nullpointer.virtualtrainercompose.domain
+package com.d34th.nullpointer.virtualtrainercompose.domain.settings
 
 import android.net.Uri
 import kotlinx.coroutines.flow.Flow

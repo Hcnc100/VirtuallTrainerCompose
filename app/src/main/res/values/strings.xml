@@ -16,4 +16,18 @@
     <string name="error_empty_name">El nombre es requerido</string>
     <string name="error_length_name">El nombre no puede ser tan laargo</string>
     <string name="error_compress_img">Error al comprimir la imagen</string>
+
+    <!-- exercise -->
+    <string name="squats_descripcion">Una sentadilla es un ejercicio físico que se lleva a cabo para desarrollar los músculos y fortalecer los tendones y los ligamentos de las piernas. También permite tonificar los glúteos y aporta beneficios a la cadera.</string>
+    <string name="squats">Sentadillas</string>
+    <string name="abdominales">Abdominales</string>
+    <string name="abdominales_descripcion">Los ejercicios abdominales sirven para fortalecer los músculos abdominales. Tonificar el abdomen no sólo favorece en la estética, sino que además se logra un organismo mucho más enérgico y libre de enfermedades. Los abdominales son un grupo de músculos especiales y forman la parte central del cuerpo.</string>
+    <string name="abdominales_cycle">Abdominales de Bicicleta</string>
+    <string name="abdominales_cycle_descripcion">Son buena forma de desarrollar nuestros abdominales oblicuos, frontal y mejorar nuestra coordinación corporal.Son una buena forma de congestionar también la zona abdominal, aunque no nos engañemos, al ser un movimiento abdominal más complejo a nivel de ejecución que otros, nos serán más difíciles de realizar..</string>
+    <string name="saltos_laterales">Saltos Laterales</string>
+    <string name="saltos_laterales_descripcion">Se trata de saltar abriendo las piernas y subiendo los brazos hasta que las manos se toquen sobre la cabeza y saltar de nuevo uniendo los pies y colocando los brazos a los lados en paralelo al cuerpo.</string>
+    <string name="plancha">Plancha</string>
+    <string name="plancha_descripcion">Es un ejercicio isométrico de torso que consiste en mantener una posición difícil por un periodo de tiempo prolongado. La plancha más común es la plancha frontal o de antebrazo, la cual se hace en una posición de lagartija con el peso corporal apoyado sobre los antebrazos, codos y dedos de los pies.</string>
+    <string name="lagartijas">Lagartijas</string>
+    <string name="lagartijas_descripcion">La flexión de codos es un ejercicio que involucra los codos, también conocida como lagartijas, plancha, pechada o simplemente flexión, es un ejercicio físico realizado estando en posición inclinada, recostado hacia abajo, levantando el cuerpo únicamente con los brazos y bajando de nuevo al suelo.</string>
 </resources>

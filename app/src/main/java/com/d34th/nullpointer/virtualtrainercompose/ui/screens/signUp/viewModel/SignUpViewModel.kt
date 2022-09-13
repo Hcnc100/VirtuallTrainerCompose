@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.d34th.nullpointer.virtualtrainercompose.R
 import com.d34th.nullpointer.virtualtrainercompose.core.delegates.PropertySavableImg
 import com.d34th.nullpointer.virtualtrainercompose.core.delegates.PropertySavableString
-import com.d34th.nullpointer.virtualtrainercompose.domain.UserSettingsRepository
+import com.d34th.nullpointer.virtualtrainercompose.domain.settings.UserSettingsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow

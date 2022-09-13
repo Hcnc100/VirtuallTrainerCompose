@@ -1,4 +1,4 @@
-package com.d34th.nullpointer.virtualtrainercompose.data.local
+package com.d34th.nullpointer.virtualtrainercompose.data.local.dataStore
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -22,12 +22,12 @@ class UsersSettings(
     private val keyImgUser = stringPreferencesKey(KEY_IMG_USER)
     private val keyNameUser = stringPreferencesKey(KEY_NAME_USER)
 
-    val nameUser: Flow<String?> = context.dataStore.data.map { pref ->
-        pref[keyNameUser]
+    val nameUser: Flow<String> = context.dataStore.data.map { pref ->
+        pref[keyNameUser] ?: ""
     }
 
-    val imgUser: Flow<String?> = context.dataStore.data.map { pref ->
-        pref[keyImgUser]
+    val imgUser: Flow<String> = context.dataStore.data.map { pref ->
+        pref[keyImgUser] ?: ""
     }
 
     suspend fun changeNameUser(newName: String) = context.dataStore.edit { pref ->

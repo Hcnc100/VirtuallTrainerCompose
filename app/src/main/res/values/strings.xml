@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">VirtualTrainerCompose</string>
+    <string name="description_arrow_back">Ir a la pantalla anterior</string>
+
+    <!-- sign in Scree -->
+    <string name="description_image_profile">Imagen de perfil actualmente seleccionada</string>
+    <string name="description_error_load_img">Error al cargar la imagen actual</string>
+    <string name="change_image_user">cambia la imagen de perfil actulamente seleccionada</string>
+    <string name="text_select_option">Selecciona una imagen de a galeria</string>
+    <string name="option_img_gallery">Galeria</string>
+    <string name="description_img_gallery">Abre la galeria para seleciionar una imagen</string>
+    <string name="option_img_camera">Camara</string>
+    <string name="description_img_camera">Abre la camar para tomar una foto de perfil</string>
+    <string name="label_name_user">Nombre</string>
+    <string name="hint_name_user">Escrine tu nombre</string>
+    <string name="error_empty_name">El nombre es requerido</string>
+    <string name="error_length_name">El nombre no puede ser tan laargo</string>
+    <string name="error_compress_img">Error al comprimir la imagen</string>
 </resources>

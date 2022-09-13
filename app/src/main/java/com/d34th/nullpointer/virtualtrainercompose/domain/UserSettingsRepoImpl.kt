@@ -16,7 +16,6 @@ class UserSettingsRepoImpl(
 ) : UserSettingsRepository {
     override val nameUser: Flow<String> = userSettingsDataSource.imgUser
     override val imgUser: Flow<String> = userSettingsDataSource.imgUser
-    override val isSignInUser: Flow<Boolean> = userSettingsDataSource.isSignInUser
 
     override suspend fun changeImgUser(imgUser: Bitmap?) {
         val fileCompress = imgUser?.let {

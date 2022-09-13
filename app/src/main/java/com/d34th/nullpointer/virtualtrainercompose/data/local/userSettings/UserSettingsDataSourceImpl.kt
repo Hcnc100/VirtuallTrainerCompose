@@ -9,9 +9,7 @@ class UserSettingsDataSourceImpl(
 ) : UserSettingsDataSource {
     override val userName: Flow<String> = usersSettings.nameUser
     override val imgUser: Flow<String> = usersSettings.imgUser
-    override val isSignInUser: Flow<Boolean> = userName.combine(imgUser) { name, img ->
-        name.isNotEmpty() && img.isNotEmpty()
-    }
+
 
     override suspend fun saveUserName(userName: String) {
         usersSettings.changeNameUser(userName)

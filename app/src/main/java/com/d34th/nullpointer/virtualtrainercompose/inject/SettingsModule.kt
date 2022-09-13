@@ -35,5 +35,5 @@ object SettingsModule {
     fun provideUserSettingsRepository(
         @ApplicationContext context: Context,
         userSettingsDataSource: UserSettingsDataSource
-    ): UserSettingsRepository = UserSettingsRepoImpl(context, userSettingsDataSource)
+    ): UserSettingsRepoImpl = UserSettingsRepoImpl(context, userSettingsDataSource)
 }

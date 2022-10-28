@@ -10,37 +10,37 @@ class ExerciseRepoImpl : ExerciseRepository {
             R.drawable.squats,
             R.string.squats,
             R.string.squats_descripcion,
-            "squat.sfb"
+            R.raw.squats
         ),
         Exercise(
             R.drawable.abdominales,
             R.string.abdominales,
             R.string.abdominales_descripcion,
-            "abdominales.sfb"
+            R.raw.abdominales
         ),
         Exercise(
             R.drawable.ejercicio,
             R.string.saltos_laterales,
             R.string.saltos_laterales_descripcion,
-            "JumpingJacks.sfb"
+            R.raw.jumping_jacks
         ),
         Exercise(
             R.drawable.push,
             R.string.lagartijas,
             R.string.lagartijas_descripcion,
-            "PushUp.sfb"
+            R.raw.push_up
         ),
         Exercise(
             R.drawable.tablon,
             R.string.plancha,
             R.string.plancha_descripcion,
-            "Plank.sfb"
+            R.raw.plank
         ),
         Exercise(
             R.drawable.abdominales,
             R.string.abdominales_cycle,
             R.string.abdominales_cycle_descripcion,
-            "BicycleCrunch.sfb"
+            R.raw.bicycle_crunch
         )
     )
 

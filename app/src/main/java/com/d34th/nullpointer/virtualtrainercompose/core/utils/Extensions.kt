@@ -1,5 +1,9 @@
 package com.d34th.nullpointer.virtualtrainercompose.core.utils
 
+import androidx.activity.ComponentActivity
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
@@ -23,4 +27,10 @@ fun ViewModel.launchSafeIO(
             blockAfter()
         }
     }
+}
+
+@Composable
+inline fun <reified VM : ViewModel> shareViewModel(): VM {
+    val activity = LocalContext.current as ComponentActivity
+    return hiltViewModel(activity)
 }

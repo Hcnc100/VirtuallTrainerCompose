@@ -1,47 +1,60 @@
 package com.d34th.nullpointer.virtualtrainercompose.domain.exercise
 
+import android.content.Context
+import android.net.Uri
 import com.d34th.nullpointer.virtualtrainercompose.R
 import com.d34th.nullpointer.virtualtrainercompose.models.Exercise
+import com.google.ar.sceneform.rendering.ModelRenderable
+import com.gorisse.thomas.sceneform.scene.await
 
-class ExerciseRepoImpl : ExerciseRepository {
+class ExerciseRepoImpl(
+    private val context: Context
+) : ExerciseRepository {
 
     override val listExercise = listOf(
         Exercise(
             R.drawable.squats,
             R.string.squats,
             R.string.squats_descripcion,
-            R.raw.squats
+            "squats.glb"
         ),
         Exercise(
             R.drawable.abdominales,
             R.string.abdominales,
             R.string.abdominales_descripcion,
-            R.raw.abdominales
+            "abdominales.glb"
         ),
         Exercise(
             R.drawable.ejercicio,
             R.string.saltos_laterales,
             R.string.saltos_laterales_descripcion,
-            R.raw.jumping_jacks
+            "jumping_jacks.glb"
         ),
         Exercise(
             R.drawable.push,
             R.string.lagartijas,
             R.string.lagartijas_descripcion,
-            R.raw.push_up
+            "push_up.glb"
         ),
         Exercise(
             R.drawable.tablon,
             R.string.plancha,
             R.string.plancha_descripcion,
-            R.raw.plank
+            "plank.glb"
         ),
         Exercise(
             R.drawable.abdominales,
             R.string.abdominales_cycle,
             R.string.abdominales_cycle_descripcion,
-            R.raw.bicycle_crunch
+            "bicycle_crunch.glb"
         )
     )
+
+    override suspend fun getModelForExercise(nameModel: String): ModelRenderable {
+        return ModelRenderable.builder()
+            .setSource(context, Uri.parse(nameModel))
+            .setIsFilamentGltf(true)
+            .await()
+    }
 
 }

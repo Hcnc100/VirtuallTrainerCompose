@@ -8,14 +8,20 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import com.d34th.nullpointer.virtualtrainercompose.core.utils.shareViewModel
 import com.d34th.nullpointer.virtualtrainercompose.presentation.ExerciseViewModel
+import com.d34th.nullpointer.virtualtrainercompose.ui.screens.destinations.CameraScreenDestination
 import com.d34th.nullpointer.virtualtrainercompose.ui.screens.exercise.componets.ExerciseItem
 import com.d34th.nullpointer.virtualtrainercompose.ui.share.SimpleToolbar
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
+
+@Destination(start = true)
 @Composable
 fun ExercisesScreen(
-    exerciseViewModel: ExerciseViewModel = hiltViewModel()
+    exerciseViewModel: ExerciseViewModel = shareViewModel(),
+    navigator: DestinationsNavigator
 ) {
     Scaffold(topBar = { SimpleToolbar(title = "Lista de ejercicios") }) {
         LazyVerticalGrid(
@@ -25,7 +31,10 @@ fun ExercisesScreen(
             items(exerciseViewModel.listExercise) { exercise ->
                 ExerciseItem(
                     exercise = exercise,
-                    onClickExercise = { exercise })
+                    onClickExercise = {
+                        exerciseViewModel.loadModel(exercise.nameModel)
+                        navigator.navigate(CameraScreenDestination)
+                    })
             }
         }
     }

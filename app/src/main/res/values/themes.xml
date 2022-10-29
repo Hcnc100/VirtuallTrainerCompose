@@ -2,6 +2,14 @@
 <resources>
 
     <style name="Theme.VirtualTrainerCompose" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:statusBarColor">@color/purple_700</item>
+        <item name="android:statusBarColor">#C72905</item>
+    </style>
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimationDuration">300</item>
+        <item name="splashScreenIconSize">200dp</item>
+        <item name="windowSplashScreenBackground">#F42F03</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/splash_background</item>
+        <item name="postSplashScreenTheme">@style/Theme.VirtualTrainerCompose</item>
     </style>
 </resources>

@@ -5,16 +5,16 @@
     <!-- sign in Scree -->
     <string name="description_image_profile">Imagen de perfil actualmente seleccionada</string>
     <string name="description_error_load_img">Error al cargar la imagen actual</string>
-    <string name="change_image_user">cambia la imagen de perfil actulamente seleccionada</string>
-    <string name="text_select_option">Selecciona una imagen de a galeria</string>
-    <string name="option_img_gallery">Galeria</string>
-    <string name="description_img_gallery">Abre la galeria para seleciionar una imagen</string>
-    <string name="option_img_camera">Camara</string>
-    <string name="description_img_camera">Abre la camar para tomar una foto de perfil</string>
+    <string name="change_image_user">Cambia la imagen de perfil actualmente seleccionada</string>
+    <string name="text_select_option">Selecciona una imagen de la galería</string>
+    <string name="option_img_gallery">Galería</string>
+    <string name="description_img_gallery">Abre la galería para seleccionar una imagen</string>
+    <string name="option_img_camera">Cámara</string>
+    <string name="description_img_camera">Abre la cámara para tomar una foto de perfil</string>
     <string name="label_name_user">Nombre</string>
-    <string name="hint_name_user">Escrine tu nombre</string>
+    <string name="hint_name_user">Escribe tu nombre</string>
     <string name="error_empty_name">El nombre es requerido</string>
-    <string name="error_length_name">El nombre no puede ser tan laargo</string>
+    <string name="error_length_name">El nombre no puede ser tan largo</string>
     <string name="error_compress_img">Error al comprimir la imagen</string>
 
     <!-- exercise -->
@@ -32,15 +32,15 @@
     <string name="lagartijas_descripcion">La flexión de codos es un ejercicio que involucra los codos, también conocida como lagartijas, plancha, pechada o simplemente flexión, es un ejercicio físico realizado estando en posición inclinada, recostado hacia abajo, levantando el cuerpo únicamente con los brazos y bajando de nuevo al suelo.</string>
     <string name="description_exercise_item">Ejercicio %s</string>
     <string name="message_no_changes">No hay cambios</string>
-    <string name="error_load_model">Error load models </string>
+    <string name="error_load_model">Error al cargar los modelos</string>
     <string name="message_need_data">Estos datos son necesarios</string>
     <string name="message_data_updated">Datos actualizados</string>
-    <string name="description_pause_animation">Pausa la animacion actual</string>
-    <string name="description_play_animation">Inicia o reanuda la animacion actual</string>
-    <string name="title_camera_screen">Camara</string>
-    <string name="title_sign_up">Registrate</string>
-    <string name="title_info_user">Informacion del usuario</string>
+    <string name="description_pause_animation">Pausa la animación actual</string>
+    <string name="description_play_animation">Inicia o reanuda la animación actual</string>
+    <string name="title_camera_screen">Cámara</string>
+    <string name="title_sign_up">Regístrate</string>
+    <string name="title_info_user">Información del usuario</string>
     <string name="title_accept">Aceptar</string>
-    <string name="description_button_help">Open description exercise</string>
-    <string name="title_description">Description</string>
+    <string name="description_button_help">Abre la descripción del ejercicio actual</string>
+    <string name="title_description">Descripción</string>
 </resources>

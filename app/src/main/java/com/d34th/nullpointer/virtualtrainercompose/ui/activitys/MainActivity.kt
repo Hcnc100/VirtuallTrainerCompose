@@ -10,6 +10,7 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import com.d34th.nullpointer.virtualtrainercompose.models.AuthState
 import com.d34th.nullpointer.virtualtrainercompose.presentation.AuthViewModel
@@ -29,6 +30,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var isSplash = true
+        installSplashScreen().apply {
+            setKeepOnScreenCondition { isSplash }
+        }
         setContent {
             VirtualTrainerComposeTheme {
                 // A surface container using the 'background' color from the theme
@@ -46,6 +51,7 @@ class MainActivity : AppCompatActivity() {
                         AuthState.Unauthenticated -> DataUserScreenDestination
                         AuthState.Authenticating -> null
                     }?.let {
+                        isSplash = false
                         DestinationsNavHost(
                             navController = rememberNavController(),
                             navGraph = NavGraphs.root,

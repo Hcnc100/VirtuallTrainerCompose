@@ -33,6 +33,10 @@ class SignUpScreenState(
             modalBottomSheetState.hide()
         }
     }
+
+    fun hiddenKeyboard() {
+        focusManager.clearFocus()
+    }
 }
 
 @OptIn(ExperimentalMaterialApi::class)

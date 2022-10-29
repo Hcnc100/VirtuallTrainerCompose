@@ -1,6 +1,8 @@
 package com.d34th.nullpointer.virtualtrainercompose.ui.share
 
 import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -29,4 +31,21 @@ fun SimpleToolbar(title: String) {
         contentColor = Color.White,
         backgroundColor = MaterialTheme.colors.primary,
         title = { Text(title) })
+}
+
+@Composable
+fun ToolbarSettings(title: String, actionSettings: () -> Unit) {
+    TopAppBar(
+        contentColor = Color.White,
+        backgroundColor = MaterialTheme.colors.primary,
+        title = { Text(title) },
+        actions = {
+            IconButton(onClick = actionSettings) {
+                Icon(
+                    Icons.Default.Settings,
+                    contentDescription = null
+                )
+            }
+        }
+    )
 }

@@ -18,10 +18,6 @@ open class SimpleScreenState(
             context.getString(stringRes)
         )
     }
-
-    suspend fun showSnackMessage(message: String) {
-        scaffoldState.snackbarHostState.showSnackbar(message)
-    }
 }
 
 @Composable

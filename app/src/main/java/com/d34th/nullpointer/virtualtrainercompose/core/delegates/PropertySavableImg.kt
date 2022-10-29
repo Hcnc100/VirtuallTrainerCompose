@@ -1,5 +1,6 @@
 package com.d34th.nullpointer.virtualtrainercompose.core.delegates
 
+
 import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -7,7 +8,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import kotlinx.coroutines.*
 import timber.log.Timber
-
+import java.io.File
 
 class PropertySavableImg(
     tagSavable: String,
@@ -32,23 +33,32 @@ class PropertySavableImg(
 
     val isNotEmpty get() = value != Uri.EMPTY
 
-    fun changeValue(newValue: Uri) {
-        jobCompress?.cancel()
-        jobCompress = scope.launch {
-            try {
-                isCompress = true
-                value = withContext(Dispatchers.IO) { actionCompress(newValue) }
-            } catch (e: Exception) {
-                when (e) {
-                    is CancellationException -> throw e
-                    else -> {
-                        Timber.e("Job compress exception $e")
-                        value = defaultValue
-                        actionSendErrorCompress()
+    fun initValue(initValue: String) {
+        value = Uri.fromFile(File(initValue))
+
+    }
+
+    fun changeValue(newValue: Uri, isInit: Boolean = false) {
+        if (isInit) {
+            value = newValue
+        } else {
+            jobCompress?.cancel()
+            jobCompress = scope.launch {
+                try {
+                    isCompress = true
+                    value = withContext(Dispatchers.IO) { actionCompress(newValue) }
+                } catch (e: Exception) {
+                    when (e) {
+                        is CancellationException -> throw e
+                        else -> {
+                            Timber.e("Job compress exception $e")
+                            value = defaultValue
+                            actionSendErrorCompress()
+                        }
                     }
+                } finally {
+                    isCompress = false
                 }
-            } finally {
-                isCompress = false
             }
         }
     }

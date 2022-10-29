@@ -1,23 +1,23 @@
 package com.d34th.nullpointer.virtualtrainercompose.data.local.userSettings
 
 import com.d34th.nullpointer.virtualtrainercompose.data.local.dataStore.UsersSettings
+import com.d34th.nullpointer.virtualtrainercompose.models.DataUser
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combine
 
 class UserSettingsDataSourceImpl(
     private val usersSettings: UsersSettings
 ) : UserSettingsDataSource {
-    override val userName: Flow<String> = usersSettings.nameUser
-    override val imgUser: Flow<String> = usersSettings.imgUser
 
+    override val currentUser: Flow<DataUser> = usersSettings.getDataUser
 
-    override suspend fun saveUserName(userName: String) {
-        usersSettings.changeNameUser(userName)
+    override suspend fun saveUser(user: DataUser) {
+        usersSettings.saveUser(user)
     }
 
-    override suspend fun saveImgUser(imgUser: String) {
-        usersSettings.changeImgUser(imgUser)
+    override suspend fun changeDataUser(name: String?, pathFile: String?) {
+        usersSettings.updateDataUser(name, pathFile)
     }
+
 
     override suspend fun clearData() {
         usersSettings.clearData()

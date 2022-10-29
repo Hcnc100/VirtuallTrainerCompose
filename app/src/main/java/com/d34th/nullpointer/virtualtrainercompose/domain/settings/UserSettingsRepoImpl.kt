@@ -2,49 +2,43 @@ package com.d34th.nullpointer.virtualtrainercompose.domain.settings
 
 import android.content.Context
 import android.net.Uri
+import androidx.core.net.toFile
 import com.d34th.nullpointer.virtualtrainercompose.core.utils.ImageUtils
 import com.d34th.nullpointer.virtualtrainercompose.data.local.userSettings.UserSettingsDataSource
-import kotlinx.coroutines.Dispatchers
+import com.d34th.nullpointer.virtualtrainercompose.models.DataUser
 import kotlinx.coroutines.flow.Flow
-import me.shouheng.compress.Compress
-import me.shouheng.compress.concrete
-import me.shouheng.compress.strategy.config.ScaleMode
-import java.io.File
 
 class UserSettingsRepoImpl(
     private val context: Context,
     private val userSettingsDataSource: UserSettingsDataSource
 ) : UserSettingsRepository {
-    override val nameUser: Flow<String> = userSettingsDataSource.imgUser
-    override val imgUser: Flow<String> = userSettingsDataSource.imgUser
+
+    override val currentUser: Flow<DataUser> =
+        userSettingsDataSource.currentUser
 
 
-    override suspend fun compressImgUri(imgUri: Uri): File {
-        val imageCompress = Compress.with(context, imgUri)
-            .setQuality(80)
-            .concrete {
-                withMaxWidth(500f)
-                withMaxHeight(500f)
-                withScaleMode(ScaleMode.SCALE_HEIGHT)
-                withIgnoreIfSmaller(true)
-            }.get(Dispatchers.IO)
-
-        return imageCompress
-    }
-
-    override suspend fun changeImgUser(imgUserUri: Uri) {
-        val fileCompress = compressImgUri(imgUserUri)
-        val nameFile = "img-profile-trainer.png"
-        val pathImg = ImageUtils.saveToInternalStorage(fileCompress, nameFile, context)
-        fileCompress.delete()
-
-        pathImg?.let {
-            userSettingsDataSource.saveImgUser(pathImg)
+    override suspend fun changeDataUser(nameUser: String?, uriImg: Uri?) {
+        val pathImg = uriImg?.let {
+            val nameFile = "img-profile-trainer.png"
+            ImageUtils.saveToInternalStorage(it.toFile(), nameFile, context)
         }
+        userSettingsDataSource.changeDataUser(nameUser, pathImg)
+
     }
 
-    override suspend fun changeNameUser(nameUser: String) =
-        userSettingsDataSource.saveUserName(nameUser)
+    override suspend fun saveUser(name: String, uriImg: Uri) {
+        val pathImg = uriImg.let {
+            val nameFile = "img-profile-trainer.png"
+            ImageUtils.saveToInternalStorage(it.toFile(), nameFile, context)
+        }
+        userSettingsDataSource.saveUser(
+            DataUser(
+                name = name,
+                pathFile = pathImg!!
+            )
+        )
+    }
+
 
     override suspend fun clearData() =
         userSettingsDataSource.clearData()

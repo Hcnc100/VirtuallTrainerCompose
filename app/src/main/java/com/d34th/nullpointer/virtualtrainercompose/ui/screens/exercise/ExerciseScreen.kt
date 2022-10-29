@@ -11,8 +11,9 @@ import androidx.compose.ui.unit.dp
 import com.d34th.nullpointer.virtualtrainercompose.core.utils.shareViewModel
 import com.d34th.nullpointer.virtualtrainercompose.presentation.ExerciseViewModel
 import com.d34th.nullpointer.virtualtrainercompose.ui.screens.destinations.CameraScreenDestination
+import com.d34th.nullpointer.virtualtrainercompose.ui.screens.destinations.DataUserScreenDestination
 import com.d34th.nullpointer.virtualtrainercompose.ui.screens.exercise.componets.ExerciseItem
-import com.d34th.nullpointer.virtualtrainercompose.ui.share.SimpleToolbar
+import com.d34th.nullpointer.virtualtrainercompose.ui.share.ToolbarSettings
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
@@ -23,7 +24,11 @@ fun ExercisesScreen(
     exerciseViewModel: ExerciseViewModel = shareViewModel(),
     navigator: DestinationsNavigator
 ) {
-    Scaffold(topBar = { SimpleToolbar(title = "Lista de ejercicios") }) {
+    Scaffold(topBar = {
+        ToolbarSettings(
+            title = "Lista de ejercicios",
+            actionSettings = { navigator.navigate(DataUserScreenDestination) })
+    }) {
         LazyVerticalGrid(
             columns = GridCells.Adaptive(250.dp),
             modifier = Modifier.padding(it),

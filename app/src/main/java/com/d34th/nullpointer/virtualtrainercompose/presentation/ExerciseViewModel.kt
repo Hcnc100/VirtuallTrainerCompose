@@ -1,6 +1,7 @@
 package com.d34th.nullpointer.virtualtrainercompose.presentation
 
 import androidx.lifecycle.ViewModel
+import com.d34th.nullpointer.virtualtrainercompose.R
 import com.d34th.nullpointer.virtualtrainercompose.core.states.Resource
 import com.d34th.nullpointer.virtualtrainercompose.core.utils.launchSafeIO
 import com.d34th.nullpointer.virtualtrainercompose.domain.exercise.ExerciseRepository
@@ -21,7 +22,7 @@ class ExerciseViewModel @Inject constructor(
 ) : ViewModel() {
 
 
-    private val _messageModels = Channel<String>()
+    private val _messageModels = Channel<Int>()
     val messageModels = _messageModels.receiveAsFlow()
 
     val listExercise = exerciseRepository.listExercise
@@ -35,7 +36,7 @@ class ExerciseViewModel @Inject constructor(
         blockException = {
             _modelRenderable.value = Resource.Failure
             Timber.d("Error load model $it")
-            _messageModels.trySend("Error load models")
+            _messageModels.trySend(R.string.error_load_model)
         },
         blockIO = {
             _modelRenderable.value = withContext(Dispatchers.Main) {

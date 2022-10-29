@@ -1,22 +1,26 @@
-package com.d34th.nullpointer.virtualtrainercompose.ui.screens.signUp.viewModel
+package com.d34th.nullpointer.virtualtrainercompose.presentation
 
-import androidx.core.net.toUri
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.d34th.nullpointer.virtualtrainercompose.R
 import com.d34th.nullpointer.virtualtrainercompose.core.delegates.PropertySavableImg
 import com.d34th.nullpointer.virtualtrainercompose.core.delegates.PropertySavableString
-import com.d34th.nullpointer.virtualtrainercompose.domain.settings.UserSettingsRepository
+import com.d34th.nullpointer.virtualtrainercompose.domain.compress.CompressRepository
+import com.d34th.nullpointer.virtualtrainercompose.models.DataUser
+import com.d34th.nullpointer.virtualtrainercompose.models.FieldsUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class SignUpViewModel @Inject constructor(
+class SettingsViewModel @Inject constructor(
     savedInstanceState: SavedStateHandle,
-    private val userSettingsRepository: UserSettingsRepository
+    private val compressRepository: CompressRepository
 ) : ViewModel() {
 
     companion object {
@@ -42,9 +46,37 @@ class SignUpViewModel @Inject constructor(
         tagSavable = TAG_IMG_USER,
         state = savedInstanceState,
         scope = viewModelScope,
-        actionCompress = { userSettingsRepository.compressImgUri(it).toUri() },
+        actionCompress = { compressRepository.compressImage(it) },
         actionSendErrorCompress = { _messageSignUp.trySend(R.string.error_compress_img) }
     )
+
+    var isNewUser by mutableStateOf(true)
+        private set
+
+
+    fun setInitValues(currentUser: DataUser) {
+        if (currentUser.name.isNotEmpty() && currentUser.pathFile.isNotEmpty()) {
+            nameUser.initValue(currentUser.name)
+            imgUser.initValue(currentUser.pathFile)
+            isNewUser = false
+        }
+    }
+
+    fun updateDataUser(): FieldsUser? {
+        return when {
+            nameUser.hasError || !imgUser.isNotEmpty -> {
+                _messageSignUp.trySend(R.string.message_need_data)
+                null
+            }
+            else -> {
+                FieldsUser(
+                    name = nameUser.currentValue,
+                    imgUrl = imgUser.value
+                )
+            }
+        }
+    }
+
 
     override fun onCleared() {
         super.onCleared()

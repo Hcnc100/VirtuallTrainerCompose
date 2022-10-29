@@ -9,7 +9,7 @@ class PropertySavableString(
     @StringRes val hint: Int,
     @StringRes val label: Int,
     private val maxLength: Int,
-    private val valueDefault: String = "",
+    private var valueDefault: String = "",
     @StringRes private val emptyError: Int = RESOURCE_DEFAULT,
     @StringRes private val lengthError: Int = RESOURCE_DEFAULT,
 ) {
@@ -34,6 +34,7 @@ class PropertySavableString(
 
     fun initValue(value: String) {
         currentValue = value
+        valueDefault = value
     }
 
     fun changeValue(newValue: String) {

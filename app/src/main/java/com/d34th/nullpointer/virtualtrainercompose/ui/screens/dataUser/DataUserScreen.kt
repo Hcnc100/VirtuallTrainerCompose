@@ -106,15 +106,15 @@ private fun DataUserScreen(
         actionBeforeSelect = actionBeforeSelect,
         topBar = {
             if (isNewUser)
-                SimpleToolbar(title = "Registrate")
+                SimpleToolbar(title = stringResource(R.string.title_sign_up))
             else
                 ToolbarBack(
-                    title = "Informacion del usuario",
+                    title = stringResource(R.string.title_info_user),
                     actionBack = { actionDataScreen(ACTION_BACK) })
         },
         floatingActionButton = {
             Button(onClick = { actionDataScreen(UPDATE_DATA) }) {
-                Text("Aceptar")
+                Text(stringResource(R.string.title_accept))
             }
         }
     ) {

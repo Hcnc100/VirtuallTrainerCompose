@@ -27,17 +27,18 @@ fun ExercisesScreen(
     navigator: DestinationsNavigator,
     exerciseViewModel: ExerciseViewModel = shareViewModel()
 ) {
-    Scaffold(topBar = {
-        ToolbarSettings(
-            title = stringResource(id = R.string.app_name),
-            actionSettings = { navigator.navigate(DataUserScreenDestination) })
-    }) { paddingValues ->
+    Scaffold(
+        topBar = {
+            ToolbarSettings(
+                title = stringResource(id = R.string.app_name),
+                actionSettings = { navigator.navigate(DataUserScreenDestination) })
+        }) { paddingValues ->
         ListExercises(
             modifier = Modifier.padding(paddingValues),
             listExercise = exerciseViewModel.listExercise,
             actionClickModel = {
                 exerciseViewModel.loadModel(it.nameModel)
-                navigator.navigate(CameraScreenDestination)
+                navigator.navigate(CameraScreenDestination(it))
             }
         )
     }

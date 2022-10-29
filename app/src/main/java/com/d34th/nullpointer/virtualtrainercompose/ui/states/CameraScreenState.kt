@@ -19,13 +19,30 @@ class CameraScreenState(
         this.modelAnimation = modelAnimation
     }
 
+    var isPlayingAnimation by mutableStateOf(false)
+
+    var isShowDialog by mutableStateOf(false)
+
+
+    fun changeVisibilityExplainDialog(isShowDialog: Boolean) {
+        this.isShowDialog = isShowDialog
+    }
 
     fun playPauseAnimation() {
         modelAnimation?.let {
             when {
-                it.isPaused -> it.resume()
-                it.isStarted -> it.pause()
-                else -> it.start()
+                it.isPaused -> {
+                    isPlayingAnimation = true
+                    it.resume()
+                }
+                it.isStarted -> {
+                    isPlayingAnimation = false
+                    it.pause()
+                }
+                else -> {
+                    isPlayingAnimation = true
+                    it.start()
+                }
             }
         }
     }

@@ -31,11 +31,11 @@ fun ExerciseItem(
         Row(modifier = Modifier.padding(10.dp), horizontalArrangement = Arrangement.Center) {
             AsyncImage(
                 model = exercise.image,
+                modifier = Modifier.weight(3f),
                 contentDescription = stringResource(
                     R.string.description_exercise_item,
                     exercise.description
-                ),
-                modifier = Modifier.weight(3f)
+                )
             )
 
             Spacer(modifier = Modifier.padding(10.dp))

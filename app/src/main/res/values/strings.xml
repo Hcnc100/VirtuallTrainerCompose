@@ -35,4 +35,12 @@
     <string name="error_load_model">Error load models </string>
     <string name="message_need_data">Estos datos son necesarios</string>
     <string name="message_data_updated">Datos actualizados</string>
+    <string name="description_pause_animation">Pausa la animacion actual</string>
+    <string name="description_play_animation">Inicia o reanuda la animacion actual</string>
+    <string name="title_camera_screen">Camara</string>
+    <string name="title_sign_up">Registrate</string>
+    <string name="title_info_user">Informacion del usuario</string>
+    <string name="title_accept">Aceptar</string>
+    <string name="description_button_help">Open description exercise</string>
+    <string name="title_description">Description</string>
 </resources>

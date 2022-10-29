@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">VirtualTrainerCompose</string>
+    <string name="description_arrow_back">Go to the previous screen</string>
+    <string name="description_image_profile">Profile picture currently selected</string>
+    <string name="description_error_load_img">Error loading current image</string>
+    <string name="change_image_user">Change the currently selected profile picture</string>
+    <string name="text_select_option">Select an image from the gallery</string>
+    <string name="option_img_gallery">Gallery</string>
+    <string name="description_img_gallery">Open the gallery to select an image</string>
+    <string name="option_img_camera">Camera</string>
+    <string name="description_img_camera">Open the camera to take a profile picture</string>
+    <string name="label_name_user">Name</string>
+    <string name="hint_name_user">Write your name</string>
+    <string name="error_empty_name">Name is required</string>
+    <string name="error_length_name">The name can\'t be that long</string>
+    <string name="error_compress_img">Error compressing image</string>
+    <string name="squats_descripcion">A squat is a physical exercise that is carried out to develop the muscles and strengthen the tendons and ligaments of the legs. It also allows to tone the buttocks and provides benefits to the hip.</string>
+    <string name="squats">Squats</string>
+    <string name="abdominales">" Crunches"</string>
+    <string name="abdominales_descripcion">Abdominal exercises serve to strengthen the abdominal muscles. Toning the abdomen not only favors aesthetics, but also a much more energetic and disease-free body is achieved. The abdominals are a group of special muscles and form the central part of the body.</string>
+    <string name="abdominales_cycle">Bicycle Crunches</string>
+    <string name="abdominales_cycle_descripcion">They are a good way to develop our oblique abdominals, frontal and improve our body coordination. They are a good way to also congest the abdominal area, although let\'s not fool ourselves, being an abdominal movement more complex at the level of execution than others, they will be more difficult for us to perform.</string>
+    <string name="saltos_laterales">Side jumps</string>
+    <string name="saltos_laterales_descripcion">It involves jumping by opening your legs and raising your arms until your hands touch above your head and jumping again by joining your feet and placing your arms at your sides parallel to your body.</string>
+    <string name="plancha">Plank</string>
+    <string name="plancha_descripcion">It is an isometric torso exercise that consists of maintaining a difficult position for a prolonged period of time. The most common plank is the front or forearm plank, which is done in a pushup position with your body weight supported by your forearms, elbows, and toes.</string>
+    <string name="lagartijas">Push Up</string>
+    <string name="lagartijas_descripcion">Elbow flexion is an exercise that involves the elbows, also known as push-ups, plank, push-up or simply flexion, it is a physical exercise performed while in an inclined position, lying down, lifting the body only with the arms and lowering back to the I usually.</string>
+    <string name="description_exercise_item">Exercise %s</string>
+    <string name="message_no_changes">There are no changes</string>
+    <string name="error_load_model">Error loading models</string>
+    <string name="message_need_data">These data are necessary</string>
+    <string name="message_data_updated">Updated data</string>
+    <string name="description_pause_animation">Pause the current animation</string>
+    <string name="description_play_animation">Start or resume the current animation</string>
+    <string name="title_camera_screen">Camera</string>
+    <string name="title_sign_up">SignUp</string>
+    <string name="title_info_user">User information</string>
+    <string name="title_accept">Accept</string>
+    <string name="description_button_help">Opens the description of the current exercise</string>
+    <string name="title_description">Description</string>
+</resources>

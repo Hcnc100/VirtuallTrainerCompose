@@ -1,5 +1,7 @@
 # VirtuallTrainerCompose
 
+Simple app to show model 3D using ArCore, simulate app excercise
+
 ## Screenshots
 ### Splash
 <p>

@@ -1,6 +1,7 @@
 # VirtuallTrainerCompose
 
-Simple app to show model 3D using ArCore, simulate app excercise
+Simple app to display 3D model using ArCore, simulate app exercise.
+These models have an animation, and this can be paused and resumed.
 
 ## Screenshots
 ### Splash

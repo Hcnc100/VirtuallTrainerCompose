@@ -1,10 +1,12 @@
 package com.d34th.nullpointer.virtualtrainercompose.inject
 
 import android.content.Context
-import com.d34th.nullpointer.virtualtrainercompose.data.local.dataStore.UsersSettings
-import com.d34th.nullpointer.virtualtrainercompose.data.local.userSettings.UserSettingsDataSource
-import com.d34th.nullpointer.virtualtrainercompose.data.local.userSettings.UserSettingsDataSourceImpl
-import com.d34th.nullpointer.virtualtrainercompose.domain.settings.UserSettingsRepoImpl
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import com.d34th.nullpointer.virtualtrainercompose.data.auth.local.AuthDataStore
+import com.d34th.nullpointer.virtualtrainercompose.datasource.auth.local.AuthLocalDataSource
+import com.d34th.nullpointer.virtualtrainercompose.datasource.auth.local.AuthLocalDataSourceImpl
+import com.d34th.nullpointer.virtualtrainercompose.domain.settings.AuthRepoImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,20 +21,20 @@ object SettingsModule {
     @Provides
     @Singleton
     fun provideUserSettings(
-        @ApplicationContext context: Context
-    ): UsersSettings = UsersSettings(context)
+        dataStore: DataStore<Preferences>
+    ): AuthDataStore = AuthDataStore(dataStore)
 
 
     @Provides
     @Singleton
     fun provideUserSettingsDataSource(
-        usersSettings: UsersSettings
-    ): UserSettingsDataSource = UserSettingsDataSourceImpl(usersSettings)
+        authDataStore: AuthDataStore
+    ): AuthLocalDataSource = AuthLocalDataSourceImpl(authDataStore)
 
     @Provides
     @Singleton
     fun provideUserSettingsRepository(
         @ApplicationContext context: Context,
-        userSettingsDataSource: UserSettingsDataSource
-    ): UserSettingsRepoImpl = UserSettingsRepoImpl(context, userSettingsDataSource)
+        authLocalDataSource: AuthLocalDataSource
+    ): AuthRepoImpl = AuthRepoImpl(context, authLocalDataSource)
 }

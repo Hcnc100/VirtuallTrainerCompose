@@ -10,7 +10,7 @@ import com.d34th.nullpointer.virtualtrainercompose.R
 import com.d34th.nullpointer.virtualtrainercompose.core.delegates.PropertySavableImg
 import com.d34th.nullpointer.virtualtrainercompose.core.delegates.PropertySavableString
 import com.d34th.nullpointer.virtualtrainercompose.domain.compress.CompressRepository
-import com.d34th.nullpointer.virtualtrainercompose.models.DataUser
+import com.d34th.nullpointer.virtualtrainercompose.models.auth.data.AuthData
 import com.d34th.nullpointer.virtualtrainercompose.models.FieldsUser
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
@@ -54,7 +54,7 @@ class SettingsViewModel @Inject constructor(
         private set
 
 
-    fun setInitValues(currentUser: DataUser) {
+    fun setInitValues(currentUser: AuthData) {
         if (currentUser.name.isNotEmpty() && currentUser.pathFile.isNotEmpty()) {
             nameUser.initValue(currentUser.name)
             imgUser.initValue(currentUser.pathFile)

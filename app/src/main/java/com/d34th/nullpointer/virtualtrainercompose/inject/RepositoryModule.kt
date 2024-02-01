@@ -4,8 +4,8 @@ import com.d34th.nullpointer.virtualtrainercompose.domain.compress.CompressRepoI
 import com.d34th.nullpointer.virtualtrainercompose.domain.compress.CompressRepository
 import com.d34th.nullpointer.virtualtrainercompose.domain.exercise.ExerciseRepoImpl
 import com.d34th.nullpointer.virtualtrainercompose.domain.exercise.ExerciseRepository
-import com.d34th.nullpointer.virtualtrainercompose.domain.settings.UserSettingsRepoImpl
-import com.d34th.nullpointer.virtualtrainercompose.domain.settings.UserSettingsRepository
+import com.d34th.nullpointer.virtualtrainercompose.domain.settings.AuthRepoImpl
+import com.d34th.nullpointer.virtualtrainercompose.domain.settings.AuthRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -19,8 +19,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun provideSettingRepository(
-        userSettingsRepoImpl: UserSettingsRepoImpl
-    ): UserSettingsRepository
+        authRepoImpl: AuthRepoImpl
+    ): AuthRepository
 
     @Binds
     @Singleton

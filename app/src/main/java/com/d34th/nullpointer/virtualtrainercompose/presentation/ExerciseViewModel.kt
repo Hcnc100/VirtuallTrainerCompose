@@ -18,31 +18,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ExerciseViewModel @Inject constructor(
-    private val exerciseRepository: ExerciseRepository
+    exerciseRepository: ExerciseRepository
 ) : ViewModel() {
 
 
-    private val _messageModels = Channel<Int>()
-    val messageModels = _messageModels.receiveAsFlow()
-
     val listExercise = exerciseRepository.listExercise
 
-    private val _modelRenderable = MutableStateFlow<Resource<ModelRenderable>>(Resource.Loading)
-    val modelRenderable = _modelRenderable.asStateFlow()
-
-
-    fun loadModel(nameModel: String) = launchSafeIO(
-        blockBefore = { _modelRenderable.value = Resource.Loading },
-        blockException = {
-            _modelRenderable.value = Resource.Failure
-            Timber.d("Error load model $it")
-            _messageModels.trySend(R.string.error_load_model)
-        },
-        blockIO = {
-            _modelRenderable.value = withContext(Dispatchers.Main) {
-                Resource.Success(exerciseRepository.getModelForExercise(nameModel))
-            }
-        }
-    )
 
 }

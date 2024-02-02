@@ -2,6 +2,13 @@
     <string name="app_name">VirtualTrainerCompose</string>
     <string name="description_arrow_back">Ir a la pantalla anterior</string>
 
+
+    <!--error example-->
+    <string name="hint_example" translatable="false">hint_example</string>
+    <string name="label_example" translatable="false">label_example</string>
+    <string name="error_empty_example" translatable="false">Error example</string>
+    <string name="error_length_example" translatable="false">Error length example</string>
+
     <!-- sign in Scree -->
     <string name="description_image_profile">Imagen de perfil actualmente seleccionada</string>
     <string name="description_error_load_img">Error al cargar la imagen actual</string>
@@ -43,4 +50,8 @@
     <string name="title_accept">Aceptar</string>
     <string name="description_button_help">Abre la descripción del ejercicio actual</string>
     <string name="title_description">Descripción</string>
+
+    <!-- errors login -->
+    <string name="message_name_error">El nombre es requerido</string>
+    <string name="message_img_error">La imagen es requerida</string>
 </resources>

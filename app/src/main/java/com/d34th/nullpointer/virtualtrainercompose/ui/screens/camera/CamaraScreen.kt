@@ -1,6 +1,7 @@
 package com.d34th.nullpointer.virtualtrainercompose.ui.screens.camera
 
 import android.animation.ObjectAnimator
+import android.app.Activity
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -9,9 +10,11 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.d34th.nullpointer.virtualtrainercompose.R
 import com.d34th.nullpointer.virtualtrainercompose.actions.CameraScreenActions
 import com.d34th.nullpointer.virtualtrainercompose.actions.CameraScreenActions.*
@@ -19,6 +22,8 @@ import com.d34th.nullpointer.virtualtrainercompose.core.states.Resource
 import com.d34th.nullpointer.virtualtrainercompose.core.utils.shareViewModel
 import com.d34th.nullpointer.virtualtrainercompose.models.Exercise
 import com.d34th.nullpointer.virtualtrainercompose.presentation.ExerciseViewModel
+import com.d34th.nullpointer.virtualtrainercompose.ui.screens.camera.viewModel.CameraViewModel
+import com.d34th.nullpointer.virtualtrainercompose.ui.screens.camera.viewModel.ViewModelFactoryProvider
 import com.d34th.nullpointer.virtualtrainercompose.ui.share.ArCoreView
 import com.d34th.nullpointer.virtualtrainercompose.ui.share.ToolbarBack
 import com.d34th.nullpointer.virtualtrainercompose.ui.states.CameraScreenState
@@ -26,13 +31,14 @@ import com.d34th.nullpointer.virtualtrainercompose.ui.states.rememberCameraScree
 import com.google.ar.sceneform.rendering.ModelRenderable
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import dagger.hilt.android.EntryPointAccessors
 
 @Destination
 @Composable
 fun CameraScreen(
     exercise: Exercise,
     navigator: DestinationsNavigator,
-    exerciseViewModel: ExerciseViewModel = shareViewModel(),
+    exerciseViewModel: CameraViewModel = measureViewModelProvider(model = exercise.nameModel),
     cameraScreenState: CameraScreenState = rememberCameraScreenState()
 ) {
 
@@ -40,11 +46,10 @@ fun CameraScreen(
         exerciseViewModel.messageModels.collect(cameraScreenState::showSnackMessage)
     }
 
-    val stateModel by exerciseViewModel.modelRenderable.collectAsState()
+
 
     CameraScreen(
         exercise = exercise,
-        stateModel = stateModel,
         scaffoldState = cameraScreenState.scaffoldState,
         modelAnimation = cameraScreenState.modelAnimation,
         isShowExplainDialog = cameraScreenState.isShowDialog,
@@ -67,7 +72,6 @@ fun CameraScreen(
     isPlayingAnimation: Boolean,
     scaffoldState: ScaffoldState,
     modelAnimation: ObjectAnimator?,
-    stateModel: Resource<ModelRenderable>,
     callbackAddModelAnimation: (ObjectAnimator) -> Unit,
     isShowExplainDialog: Boolean,
     actionCameraScreen: (CameraScreenActions) -> Unit
@@ -89,41 +93,31 @@ fun CameraScreen(
         }
     ) { paddingValues ->
 
-        when (stateModel) {
-            Resource.Failure -> Unit
-            Resource.Loading -> {
-                Box(
-                    modifier = Modifier
-                        .padding(paddingValues)
-                        .fillMaxSize(),
-                    contentAlignment = Alignment.Center
-                ) {
-                    CircularProgressIndicator()
-                }
-            }
-            is Resource.Success -> {
-                Box {
-                    ArCoreView(
-                        model = stateModel.data,
-                        isModelAdded = modelAnimation != null,
-                        modifier = Modifier.padding(paddingValues),
-                        actionTapArPlaneListener = callbackAddModelAnimation
-                    )
-                    ButtonHelp(
-                        actionClick = { actionCameraScreen(SHOW_DIALOG) },
-                        modifier = Modifier
-                            .align(Alignment.TopEnd)
-                            .padding(10.dp)
-                    )
-                    if (isShowExplainDialog)
-                        DialogExplain(
-                            actionHidden = { actionCameraScreen(HIDDEN_DIALOG) },
-                            exercise = exercise
-                        )
-                }
-            }
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(paddingValues),
+            contentAlignment = Alignment.Center
+        ) {
+            ArCoreView(
+                model = exercise.nameModel
+            )
+            ButtonHelp(
+                actionClick = { actionCameraScreen(SHOW_DIALOG) },
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(10.dp)
+            )
+            if (isShowExplainDialog)
+                DialogExplain(
+                    actionHidden = { actionCameraScreen(HIDDEN_DIALOG) },
+                    exercise = exercise
+                )
         }
     }
+
+
 }
 
 @Composable
@@ -184,6 +178,17 @@ private fun ButtonPlayPause(
             contentDescription = stringResource(id = descriptionId)
         )
     }
+}
+
+
+@Composable
+fun measureViewModelProvider(model: String): CameraViewModel {
+    val factory = EntryPointAccessors.fromActivity(
+        LocalContext.current as Activity,
+        ViewModelFactoryProvider::class.java
+    ).cameraViewModelFactory()
+
+    return viewModel(factory = CameraViewModel.provideMainViewModelFactory(factory, model))
 }
 
 

@@ -1,71 +1,60 @@
 package com.d34th.nullpointer.virtualtrainercompose.core.delegates
 
-
 import android.net.Uri
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
-import kotlinx.coroutines.*
-import timber.log.Timber
-import java.io.File
 
 class PropertySavableImg(
     tagSavable: String,
     state: SavedStateHandle,
-    private val scope: CoroutineScope,
-    private val defaultValue: Uri = Uri.EMPTY,
-    private val actionSendErrorCompress: () -> Unit,
-    private val actionCompress: suspend (Uri) -> Uri
+    private var defaultValue: Uri = Uri.EMPTY,
 ) {
+
+    companion object {
+        val example = PropertySavableImg(
+            tagSavable = "example",
+            state = SavedStateHandle()
+        )
+    }
 
     private val idSaved = "SAVED_PROPERTY_IMG_$tagSavable"
 
     var value: Uri by SavableComposeState(state, "$idSaved-CURRENT-VALUE", Uri.EMPTY)
         private set
 
-    var isCompress by mutableStateOf(false)
+    var isLoading by mutableStateOf(false)
         private set
-
-    private var jobCompress: Job? = null
 
     val hasChanged get() = value != defaultValue
 
     val isNotEmpty get() = value != Uri.EMPTY
 
-    fun initValue(initValue: String) {
-        value = Uri.fromFile(File(initValue))
+    val isEmpty get() = value == Uri.EMPTY
 
-    }
-
-    fun changeValue(newValue: Uri, isInit: Boolean = false) {
-        if (isInit) {
-            value = newValue
-        } else {
-            jobCompress?.cancel()
-            jobCompress = scope.launch {
-                try {
-                    isCompress = true
-                    value = withContext(Dispatchers.IO) { actionCompress(newValue) }
-                } catch (e: Exception) {
-                    when (e) {
-                        is CancellationException -> throw e
-                        else -> {
-                            Timber.e("Job compress exception $e")
-                            value = defaultValue
-                            actionSendErrorCompress()
-                        }
-                    }
-                } finally {
-                    isCompress = false
-                }
-            }
+    fun getValueOnlyHasChanged(): Uri? {
+        return when {
+            hasChanged -> value
+            else -> null
         }
     }
 
+    fun setDefaultValue(newValue: Uri) {
+        defaultValue = newValue
+        value = newValue
+    }
+
+    fun changeValue(newValue: Uri) {
+        value = newValue
+    }
+
+    fun changeImageLoading(isLoading: Boolean) {
+        this.isLoading = isLoading
+    }
+
     fun clearValue() {
-        isCompress = false
+        isLoading = false
         value = defaultValue
-        jobCompress?.cancel()
     }
 }

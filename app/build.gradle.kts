@@ -106,17 +106,17 @@ dependencies {
     testImplementation("androidx.room:room-testing:${roomVersion}")
 
     // * Timber
-    implementation("com.jakewharton.timber:timber:4.7.1")
+    implementation("com.jakewharton.timber:timber:5.0.1")
     implementation("com.orhanobut:logger:2.2.0")
 
     // * coil
-    implementation("io.coil-kt:coil-compose:2.2.2")
+    implementation("io.coil-kt:coil-compose:2.5.0")
 
     // * save state view model
-    implementation("androidx.savedstate:savedstate-ktx:1.2.0")
+    implementation("androidx.savedstate:savedstate-ktx:1.2.1")
 
     // * splash
-    implementation("androidx.core:core-splashscreen:1.0.0")
+    implementation("androidx.core:core-splashscreen:1.0.1")
 
     // * data store
     implementation("androidx.datastore:datastore:1.0.0")
@@ -125,11 +125,11 @@ dependencies {
     // * image compressor
     implementation("com.github.Shouheng88:compressor:1.6.0")
 
-    // * ar core
-    implementation("com.gorisse.thomas.sceneform:sceneform:1.21.0")
-    implementation("androidx.compose.ui:ui-viewbinding:1.3.0")
-    implementation("androidx.fragment:fragment-ktx:1.5.4")
+    // * save state
+    implementation("androidx.savedstate:savedstate-ktx:1.2.1")
 
     // * kotlin serialization
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
+
+    implementation("io.github.sceneview:arsceneview:2.0.3")
 }

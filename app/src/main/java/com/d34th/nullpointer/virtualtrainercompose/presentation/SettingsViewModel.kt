@@ -3,24 +3,31 @@ package com.d34th.nullpointer.virtualtrainercompose.presentation
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.core.net.toUri
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.d34th.nullpointer.virtualtrainercompose.R
 import com.d34th.nullpointer.virtualtrainercompose.core.delegates.PropertySavableImg
 import com.d34th.nullpointer.virtualtrainercompose.core.delegates.PropertySavableString
+import com.d34th.nullpointer.virtualtrainercompose.core.utils.launchSafeIO
 import com.d34th.nullpointer.virtualtrainercompose.domain.compress.CompressRepository
-import com.d34th.nullpointer.virtualtrainercompose.models.auth.data.AuthData
-import com.d34th.nullpointer.virtualtrainercompose.models.FieldsUser
+import com.d34th.nullpointer.virtualtrainercompose.domain.settings.AuthRepository
+import com.d34th.nullpointer.virtualtrainercompose.models.auth.wrapper.AuthWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     savedInstanceState: SavedStateHandle,
-    private val compressRepository: CompressRepository
+    private val authRepository: AuthRepository,
+    private val compressRepository: CompressRepository,
 ) : ViewModel() {
 
     companion object {
@@ -32,46 +39,62 @@ class SettingsViewModel @Inject constructor(
     private val _messageSignUp = Channel<Int>()
     val messageSignUp = _messageSignUp.receiveAsFlow()
 
+
     val nameUser = PropertySavableString(
-        state = savedInstanceState,
+        savedState = savedInstanceState,
         tagSavable = TAG_NAME_USER,
         maxLength = MAX_LENGTH_NAME,
         hint = R.string.hint_name_user,
         label = R.string.label_name_user,
         emptyError = R.string.error_empty_name,
-        lengthError = R.string.error_length_name
+        lengthError = R.string.error_length_name,
     )
 
     val imgUser = PropertySavableImg(
         tagSavable = TAG_IMG_USER,
-        state = savedInstanceState,
-        scope = viewModelScope,
-        actionCompress = { compressRepository.compressImage(it) },
-        actionSendErrorCompress = { _messageSignUp.trySend(R.string.error_compress_img) }
+        state = savedInstanceState
     )
 
     var isNewUser by mutableStateOf(true)
         private set
 
 
-    fun setInitValues(currentUser: AuthData) {
-        if (currentUser.name.isNotEmpty() && currentUser.pathFile.isNotEmpty()) {
-            nameUser.initValue(currentUser.name)
-            imgUser.initValue(currentUser.pathFile)
-            isNewUser = false
-        }
+    init {
+        loadUserData()
     }
 
-    fun updateDataUser(): FieldsUser? {
+    private fun loadUserData() = viewModelScope.launch(
+        Dispatchers.IO
+    ) {
+     authRepository.currentUser.first()?.let {
+        nameUser.setDefaultValue(it.name)
+        imgUser.setDefaultValue(it.pathFile.toUri())
+         withContext(Dispatchers.Main){
+             isNewUser = false
+         }
+     }
+    }
+
+    fun saveDataUser(
+        authWrapper: AuthWrapper
+    ) = launchSafeIO {
+        authRepository.saveAuthData(authWrapper)
+    }
+
+    fun getAuthWrapper(): AuthWrapper? {
         return when {
-            nameUser.hasError || !imgUser.isNotEmpty -> {
-                _messageSignUp.trySend(R.string.message_need_data)
+            nameUser.hasError->{
+                _messageSignUp.trySend(R.string.message_name_error)
+                null
+            }
+           imgUser.isEmpty -> {
+                _messageSignUp.trySend(R.string.message_img_error)
                 null
             }
             else -> {
-                FieldsUser(
-                    name = nameUser.currentValue,
-                    imgUrl = imgUser.value
+                AuthWrapper(
+                    image = imgUser.getValueOnlyHasChanged(),
+                    name = nameUser.getValueOnlyHasChanged(),
                 )
             }
         }

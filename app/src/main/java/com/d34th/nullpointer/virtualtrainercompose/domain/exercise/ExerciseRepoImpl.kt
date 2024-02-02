@@ -5,7 +5,6 @@ import android.net.Uri
 import com.d34th.nullpointer.virtualtrainercompose.R
 import com.d34th.nullpointer.virtualtrainercompose.models.Exercise
 import com.google.ar.sceneform.rendering.ModelRenderable
-import com.gorisse.thomas.sceneform.scene.await
 
 class ExerciseRepoImpl(
     private val context: Context
@@ -50,11 +49,6 @@ class ExerciseRepoImpl(
         )
     )
 
-    override suspend fun getModelForExercise(nameModel: String): ModelRenderable {
-        return ModelRenderable.builder()
-            .setSource(context, Uri.parse(nameModel))
-            .setIsFilamentGltf(true)
-            .await()
-    }
+
 
 }

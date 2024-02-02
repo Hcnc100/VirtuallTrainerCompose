@@ -33,26 +33,6 @@ class AuthViewModel @Inject constructor(
         AuthState.Authenticating
     )
 
-    fun updateDataUser(fields: FieldsUser) = launchSafeIO {
-        val currentUser = settingsRepository.currentUser.first()
-        // ! TODO fix this
-//        if (currentUser.name == fields.name && currentUser.pathFile == fields.imgUrl?.path) {
-//            _messageAuth.trySend(R.string.message_no_changes)
-//        } else {
-//            settingsRepository.changeDataUser(
-//                nameUser = if (currentUser.name != fields.name) fields.name else null,
-//                uriImg = if (currentUser.pathFile != fields.imgUrl?.path) fields.imgUrl else null
-//            )
-//            _messageAuth.trySend(R.string.message_data_updated)
-//        }
 
-    }
-
-    fun createDataUser(fields: FieldsUser) = launchSafeIO {
-        settingsRepository.saveUser(
-            name = fields.name,
-            uriImg = fields.imgUrl!!
-        )
-    }
 
 }

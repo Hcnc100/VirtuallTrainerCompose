@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AuthData(
-    val name: String,
-    val pathFile: String
+    val name: String = "",
+    val pathFile: String = "",
 )

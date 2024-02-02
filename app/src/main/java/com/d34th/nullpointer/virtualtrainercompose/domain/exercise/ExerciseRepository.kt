@@ -6,5 +6,5 @@ import com.google.ar.sceneform.rendering.ModelRenderable
 interface ExerciseRepository {
     val listExercise: List<Exercise>
 
-    suspend fun getModelForExercise(nameModel: String): ModelRenderable
+
 }

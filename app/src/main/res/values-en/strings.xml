@@ -40,4 +40,8 @@
     <string name="title_accept">Accept</string>
     <string name="description_button_help">Opens the description of the current exercise</string>
     <string name="title_description">Description</string>
+
+    <!-- errors login -->
+    <string name="message_name_error">The name is required</string>
+    <string name="message_img_error">The image is required</string>
 </resources>

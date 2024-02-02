@@ -2,14 +2,17 @@ package com.d34th.nullpointer.virtualtrainercompose.ui.screens.exercise.componet
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -28,32 +31,44 @@ fun ExerciseItem(
             .padding(4.dp)
             .clickable { onClickExercise() }
     ) {
-        Row(modifier = Modifier.padding(10.dp), horizontalArrangement = Arrangement.Center) {
+        Row(
+            modifier = Modifier.padding(10.dp),
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
             AsyncImage(
                 model = exercise.image,
-                modifier = Modifier.weight(3f),
+                modifier = Modifier.size(100.dp),
                 contentDescription = stringResource(
                     R.string.description_exercise_item,
                     exercise.description
                 )
             )
-
-            Spacer(modifier = Modifier.padding(10.dp))
-
-            Column(modifier = Modifier.weight(7f)) {
+            Column(
+                modifier = Modifier.weight(1f),
+                verticalArrangement = Arrangement.spacedBy(10.dp)
+            ) {
                 Text(
-                    text = stringResource(id = exercise.title),
+                    fontSize = 16.sp,
                     style = MaterialTheme.typography.h5,
-                    fontSize = 16.sp
+                    text = stringResource(id = exercise.title)
                 )
-                Spacer(modifier = Modifier.size(10.dp))
                 Text(
-                    text = stringResource(id = exercise.description),
                     maxLines = 4,
                     overflow = TextOverflow.Ellipsis,
-                    style = MaterialTheme.typography.caption
+                    style = MaterialTheme.typography.caption,
+                    text = stringResource(id = exercise.description)
                 )
             }
         }
     }
+}
+
+@Preview
+@Composable
+private fun ExerciseItemPreview() {
+    ExerciseItem(
+        exercise = Exercise.example,
+        onClickExercise = { /*TODO*/ }
+    )
 }
